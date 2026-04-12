@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: java-test-app
-        image: vikhyathveluri/java-test-app:latest   # ✅ change ONLY username
+        image: vikhyathveluri/retail-system:latest  # ✅ change ONLY username
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

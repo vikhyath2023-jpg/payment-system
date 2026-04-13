@@ -1,34 +1,33 @@
+package com.example;
+
 public class App {
 
-    // Deposit method
-    public int deposit(int balance, int amount) {
-        return balance + amount;
+    private double balance;
+
+    // Constructor
+    public App(double initialBalance) {
+        this.balance = initialBalance;
     }
 
-    // Withdraw method
-    public int withdraw(int balance, int amount) {
-        if (amount > balance) {
-            return balance; // no overdraft
+    // Payment method
+    public String makePayment(double amount) {
+
+        // Validation checks
+        if (amount <= 0) {
+            return "FAIL: Invalid amount";
         }
-        return balance - amount;
+
+        if (amount > balance) {
+            return "FAIL: Insufficient balance";
+        }
+
+        // Success case
+        balance -= amount;
+        return "SUCCESS";
     }
 
-    // Check balance
-    public int checkBalance(int balance) {
+    // Get remaining balance
+    public double getBalance() {
         return balance;
-    }
-
-    public static void main(String[] args) {
-        App bank = new App();
-
-        int balance = 1000;
-
-        balance = bank.deposit(balance, 500);
-        System.out.println("After deposit: " + balance);
-
-        balance = bank.withdraw(balance, 300);
-        System.out.println("After withdrawal: " + balance);
-
-        System.out.println("Final Balance: " + bank.checkBalance(balance));
     }
 }

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: banking-system 
+  name: payment-system 
   labels:
     app: java-test-app
 spec:
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: java-test-app
-        image: vikhyathveluri/banking-system:latest  # ✅ change ONLY username
+        image: vikhyathveluri/payment-system:latest  
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -25,7 +25,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: banking-service
+  name: payment-service
 spec:
   type: NodePort
   selector:

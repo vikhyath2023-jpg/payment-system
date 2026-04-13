@@ -1,29 +1,45 @@
+package com.example;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AppTest {
+class AppTest {
 
     @Test
-    void testDeposit() {
-        App bank = new App();
-        assertEquals(1500, bank.deposit(1000, 500));
+    void testSuccessfulPayment() {
+        App app = new App(1000);
+
+        String result = app.makePayment(500);
+
+        assertEquals("SUCCESS", result);
+        assertEquals(500, app.getBalance());
     }
 
     @Test
-    void testWithdraw() {
-        App bank = new App();
-        assertEquals(700, bank.withdraw(1000, 300));
+    void testInsufficientBalance() {
+        App app = new App(300);
+
+        String result = app.makePayment(500);
+
+        assertEquals("FAIL: Insufficient balance", result);
+        assertEquals(300, app.getBalance()); // balance unchanged
     }
 
     @Test
-    void testWithdrawInsufficientBalance() {
-        App bank = new App();
-        assertEquals(1000, bank.withdraw(1000, 1500));
+    void testInvalidAmount() {
+        App app = new App(1000);
+
+        String result = app.makePayment(-100);
+
+        assertEquals("FAIL: Invalid amount", result);
     }
 
     @Test
-    void testCheckBalance() {
-        App bank = new App();
-        assertEquals(1000, bank.checkBalance(1000));
+    void testZeroAmount() {
+        App app = new App(1000);
+
+        String result = app.makePayment(0);
+
+        assertEquals("FAIL: Invalid amount", result);
     }
 }
